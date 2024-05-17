@@ -6,7 +6,7 @@ class MyOrmLib {
     async initialize(dbConfig) {
         console.log("initializing",dbConfig)
         const dbSource = await getDataSource(dbConfig)
-        this.connection = dbSource.initialize();
+        this.connection = await dbSource.initialize();
     }
 
     async getRepository(entity) {

@@ -3,7 +3,7 @@ const User = require("../model/User");
 
 module.exports = new EntitySchema({
     name: "User",
-    target: User.User,
+    target: User,
     tableName: "users",
     columns: {
         id: {

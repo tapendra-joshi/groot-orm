@@ -11,7 +11,7 @@ const getDataSource = async(dbConfig) => {
         synchronize: true,
         logging: false,
         entities: [
-            require(__dirname + '\\entity\\UserSchema.js'),
+            require(__dirname + '/entity/UserSchema.js'),
         ],
         migrations: ["src/migration/**/*.js"],
         cli: {
