@@ -8,7 +8,7 @@ module.exports = new EntitySchema({
     columns: {
         id: {
             primary: true,
-            type: "int",
+            type: "bigint",
             generated: true,
         },
         firstName: {
@@ -24,6 +24,20 @@ module.exports = new EntitySchema({
             type: "varchar",
         },
     },
+    indices: [
+        {
+            name: "IDX_USER_EMAIL",
+            columns: ["email"]
+        }
+    ],
+    relations: {
+        setting: {
+            target: "Setting",
+            type: "one-to-one",
+            joinColumn: true,
+            cascade: true
+        }
+    }
 });
  
 

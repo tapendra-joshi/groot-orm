@@ -1,26 +1,33 @@
 const { DataSource } = require("typeorm");
+const path = require('path');
+const {glob} = require('glob');
 
-const getDataSource = async(dbConfig) => {
-    let dbSource = new DataSource({
-        host: dbConfig.host,
-        port: dbConfig.port,
-        username: dbConfig.username,
-        password: dbConfig.password,
-        database: dbConfig.database,
-        type: dbConfig.type,
-        synchronize: true,
-        logging: false,
-        entities: [
-            require(__dirname + '/entity/UserSchema.js'),
-        ],
-        migrations: ["src/migration/**/*.js"],
-        cli: {
-            entitiesDir: "src/entity",
-            migrationsDir: "src/migration",
-        },
+function getMigrationsPath() {
+    console.log(path.resolve(__dirname,'migration'));
+    const pathss = glob.sync("\*.js", {cwd:path.resolve(__dirname,'migration')});
+    console.log(pathss)
+    var filePaths = [];
+    pathss.map((m)=> {
+        filePaths.push(path.join(__dirname,'migration',m))
     })
-    return dbSource
-}
+    console.log("filePaths",filePaths)
+    return filePaths
+  }
 
-
-module.exports = {getDataSource: getDataSource}
+const AppDataSource = new DataSource({
+    host: process.env.host,
+    port: process.env.port,
+    username: process.env.username,
+    password: process.env.password,
+    database: process.env.database,
+    type: process.env.type,
+    synchronize: false,
+    logging: true,
+    entities: [
+        require(__dirname + '/entity/UserSchema.js'),
+        require(__dirname + '/entity/SettingSchema.js'),
+    ],
+    migrations: getMigrationsPath(),
+    
+});
+module.exports = AppDataSource

@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typeorm": "node node_modules/typeorm/cli.js",
+    "migration:generate": "typeorm migration:generate ./src/migration/InitialMigration -d ./src/ormconfig.js",
+    "migration:run": "typeorm migration:run -d ./src/ormconfig.js",
+    "migration:revert": "typeorm migration:revert -d ./src/ormconfig.js"
   },
   "keywords": [],
   "author": "",
