@@ -22,7 +22,7 @@ const AppDataSource = new DataSource({
     database: process.env.database,
     type: process.env.type,
     synchronize: false,
-    logging: true,
+    logging: false,
     entities: [
         require(__dirname + '/entity/UserSchema.js'),
         require(__dirname + '/entity/SettingSchema.js'),
