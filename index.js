@@ -14,7 +14,6 @@ class MyOrmLib {
         const dataSource = require("./src/ormconfig");
         this.connection = await dataSource.initialize();
         await this.connection.runMigrations();
-        await this.connection
     }
 
     async getRepository(entity) {
